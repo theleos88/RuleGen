@@ -113,25 +113,23 @@ def generate_rule (string, type):
 
 			lists.append(new_string)
 	else:
-
-		s=""
-		
+		s=""		
 		for string_s in string.split():
+			#print len(string.split())
 			#print string_s.count('x')
-			local = mask[string_s.count('x')]
+			m = string_s.count('x')
+			local = mask[m]
 			
 			#s+=string.replace("x", "0")
 			if(len(string_s)<30):
 				s+= str(int_from_bit_string(string_s.replace("x", "0")))
 				s+=" "
-				s+=str(int(math.pow(2, len(string_s)-1)))
+				s+=str(  int(math.pow(2, len(string_s))) - int(math.pow(2, m))  )
 			else:
 				s+= ip_string_from_int(int_from_bit_string(string_s.replace("x", "0")))
 				s+=" "
-				s+=local
-				
+				s+=local	
 			s+=" "
-
                         
 		file2= open("prefix_generated.txt", "a")
                 file2.write(s)
@@ -139,6 +137,8 @@ def generate_rule (string, type):
                 file2.close()
 
 		lists.append(s)
+		#print ("lists size")
+		#print len(lists)
 
 	return lists
 
@@ -151,6 +151,7 @@ def generate_bit_field( len, p, type):
 
 	for i in range(0, len):
 		rnd = random.random()
+		#print rnd
 		if(rnd < p):
 			s+= "x"
 			s2+="x"
@@ -161,10 +162,12 @@ def generate_bit_field( len, p, type):
 			else:
 				s+= "0"
 				s1+="0"
+
 	if(type==0):
 		return s
 	else:
 		s1+=s2
+		#print s1
 		return s1
 
 
@@ -231,6 +234,7 @@ for i in range(0, n):	# For each rule
 		string+=a
 		string+=" "
 
+	#print string
 	new_rules = generate_rule(string, type)	# Generate VeriFlow rules
 	print_line_file(file, data)	# Print string like this in the non parsed data file
 
