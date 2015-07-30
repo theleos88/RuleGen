@@ -198,28 +198,31 @@ length = {"IPS":32, "IPD":32, "PRTS":16, "PRTD":16, "PROTO":5, "FROM":3, "ICMP":
 if (len(sys.argv)<2):	
 	print ("Usage:\n python dataset.py [-p probability] [-n NUM ELEMENTS] [-f num fields] [-t TYPE] ") 
 	print ("TYPE: general, prefix, exacts, ... ")
-	print ("DEFAULT: p  = 0.6, n = 1000, f = 7, t = general")
+	print ("DEFAULT: p  = 0.6, n = 300, f = 7, t = general")
 	print ("Fields:" ,f)
 	print ("Field length:" , length)
 	exit()
 
-for i in range(0, len(sys.argv)/2):
-	if(sys.argv[2*i+1] == "-p"):
-		p = sys.argv[2*i+2]
-	if(sys.argv[2*i+1] == "-n"):
-		n = sys.argv[2*i+2]
-	if(sys.argv[2*i+1] == "-t"):
-		if(sys.argv[2*i+2]=="prefix"):
+for i in range(0, len(sys.argv)):
+	if(sys.argv[i] == "-p"):
+		p = sys.argv[i+1]
+	if(sys.argv[i] == "-n"):
+		n = int(sys.argv[i+1])
+		print "Detected n", n
+		print n
+	if(sys.argv[i] == "-t"):
+		if(sys.argv[i+1]=="prefix"):
 			type = 1
-	if(sys.argv[2*i+1] == "-f"):
-		h = int(sys.argv[2*i+2])
+	if(sys.argv[i] == "-f"):
+		h = int(sys.argv[i+1])
 		f = []
 		length = {}
-		for n in (range (0, h) ):
-			s="FIELD"+str(n)
+		for g in (range (0, h) ):
+			s="FIELD"+str(g)
 			f.append(s)
 			length[s] = 32
 
+print f
 print "Starting with ", "p=",p, "NUM ELEM=", n, "NUM FIELD=", f, type
 
 
