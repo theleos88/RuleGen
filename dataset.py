@@ -208,8 +208,6 @@ for i in range(0, len(sys.argv)):
 		p = sys.argv[i+1]
 	if(sys.argv[i] == "-n"):
 		n = int(sys.argv[i+1])
-		print "Detected n", n
-		print n
 	if(sys.argv[i] == "-t"):
 		if(sys.argv[i+1]=="prefix"):
 			type = 1
@@ -222,7 +220,6 @@ for i in range(0, len(sys.argv)):
 			f.append(s)
 			length[s] = 32
 
-print f
 print "Starting with ", "p=",p, "NUM ELEM=", n, "NUM FIELD=", f, type
 
 
